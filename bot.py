@@ -49,17 +49,6 @@ def listener(messages):
 			text = m.text
 			if text == 'subs':
 				bot.send_message(chatid, oldSubs)
-			elif text == 'follow_subs':
-				while True:
-					data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
-					currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-
-					if currentSubs != oldSubs:
-						bot.send_message(chatid, currentSubs)
-
-					oldSubs = currentSubs
-
-					sleep(5)
 			else:
 				bot.send_message(chatid, text)
 
