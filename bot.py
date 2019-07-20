@@ -10,8 +10,8 @@ from time import sleep
 # Example of your code beginning
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
-ID = os.environ['YT_ID']
-KEY = os.environ['API_KEY']
+yt_id = os.environ['YT_ID']
+yt_KEY = os.environ['API_KEY']
 #             ...
 
 #       Your bot code below
@@ -27,7 +27,7 @@ def send_message(message):
 	
 @bot.message_handler(command=['subs'])
 def send_message(message):
-	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + ID + "&key=" + KEY).read()
+	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
 	oldSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 	bot.reply_to(message, oldSubs)
 
