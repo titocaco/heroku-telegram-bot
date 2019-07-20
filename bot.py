@@ -40,17 +40,17 @@ oldSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 # bot.polling()
 
 def listener(messages):
-    """
-    When new messages arrive TeleBot will call this function.
-    """
-    for m in messages:
-        chatid = m.chat.id
-        if m.content_type == 'text':
-            text = m.text
-	    if text == 'subs':
-		bot.send_message(chatid, oldSubs)
-	    else:
-		bot.send_message(chatid, text)
+	"""
+	When new messages arrive TeleBot will call this function.
+	"""
+	for m in messages:
+	chatid = m.chat.id
+	if m.content_type == 'text':
+    		text = m.text
+		if text == 'subs':
+			bot.send_message(chatid, oldSubs)
+		else:
+			bot.send_message(chatid, text)
 
 
 bot.set_update_listener(listener) #register listener
@@ -61,4 +61,4 @@ bot.polling(none_stop=True)
 bot.polling(interval=3)
 
 while True: # Don't let the main Thread end.
-    pass
+	pass
