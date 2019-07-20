@@ -21,16 +21,15 @@ KEY = os.environ['API_KEY']
 
 bot = telebot.TeleBot(token)
 
-data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + ID + "&key=" + KEY).read()
-oldSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-
 @bot.message_handler(commands=['acorde', 'help'])
 def send_message(message):
 	bot.reply_to(message, 'Bom dia!')
 	
 @bot.message_handler(command=['subs'])
 def send_message(message):
-	bot.reply_to(message, 'Subs: ' + oldSubs)
+	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + ID + "&key=" + KEY).read()
+	oldSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+	bot.reply_to(message, oldSubs)
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
