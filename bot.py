@@ -60,5 +60,16 @@ bot.polling(none_stop=True)
 # Interval setup. Sleep 3 secs between request new message.
 bot.polling(interval=3)
 
+while True:
+	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
+	currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+	
+	if currentSubs != oldSubs:
+		print(currentSubs)
+	
+	oldSubs = currentSubs
+	
+	sleep(5)
+
 while True: # Don't let the main Thread end.
 	pass
