@@ -44,13 +44,13 @@ def listener(messages):
 	When new messages arrive TeleBot will call this function.
 	"""
 	for m in messages:
-	chatid = m.chat.id
-	if m.content_type == 'text':
-    		text = m.text
-		if text == 'subs':
-			bot.send_message(chatid, oldSubs)
-		else:
-			bot.send_message(chatid, text)
+		chatid = m.chat.id
+		if m.content_type == 'text':
+			text = m.text
+			if text == 'subs':
+				bot.send_message(chatid, oldSubs)
+			else:
+				bot.send_message(chatid, text)
 
 
 bot.set_update_listener(listener) #register listener
