@@ -3,6 +3,9 @@ import os
 import telebot
 # import some_api_lib
 # import ...
+from urllib import request
+import json
+from time import sleep
 
 # Example of your code beginning
 #           Config vars
