@@ -18,3 +18,15 @@ r = redis.from_url(os.environ.get("REDIS_URL"))
 # bot = telebot.TeleBot(token)
 # some_api = some_api_lib.connect(some_api_token)
 #              ...
+
+bot = telebot.TeleBot(token)
+
+@bot.message_handler(commands=['acorde', 'help'])
+def send_message(message):
+	bot.reply_to(message, 'Bom dia!')
+
+@bot.message_handler(func=lambda message: True)
+def echo_all(message):
+	bot.reply_to(message, message.text)
+
+bot.polling()
