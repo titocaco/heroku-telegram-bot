@@ -11,7 +11,7 @@ from time import sleep
 #           Config vars
 token = os.environ['TELEGRAM_TOKEN']
 yt_id = os.environ['YT_ID']
-yt_KEY = os.environ['API_KEY']
+yt_key = os.environ['API_KEY']
 #             ...
 
 #       Your bot code below
