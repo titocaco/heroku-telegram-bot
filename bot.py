@@ -29,7 +29,7 @@ def send_message(message):
 def send_message(message):
 	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
 	oldSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-	bot.reply_to(message, oldSubs)
+	bot.reply_to(message, 'oldSubs')
 
 @bot.message_handler(func=lambda message: True)
 def echo_all(message):
