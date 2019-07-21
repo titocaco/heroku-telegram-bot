@@ -59,6 +59,8 @@ def listener(messages):
 		
 		if str(chatid) == tg_id:
 			if m.content_type == 'text':
+				text = m.text
+				
 				if text == 'on':
 					bot.send_message(tg_id, 'STARTING BOT...')
 					STATUS = True
