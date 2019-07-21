@@ -68,7 +68,7 @@ def listener(messages):
 
 				sleep(5)
 		else:
-			bot.send_message(chatid, chatid + '___' + tg_id)
+			bot.send_message(chatid, str(chatid) + '___' + tg_id)
 			bot.send_message(chatid, 'Desculpe-me, mas meu pai me ensinou que não devo conversar com estranhos!')
 
 
