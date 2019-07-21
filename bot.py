@@ -37,7 +37,7 @@ bot = telebot.TeleBot(token)
 
 # bot.polling()
 
-STATUS = True
+STATUS = False
 
 def listener(messages):
 	"""
@@ -73,13 +73,13 @@ def listener(messages):
 					currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
 					if currentSubs > oldSubs:
-						bot.send_message(tg_id, 'Boa! Mais um Sub na área! =)\nTotal: %s' % currentSubs)
+						bot.send_message(tg_id, 'Ganhamos %d Subs hoje! =)' % int(currentSubs)-int(oldSubs))
 					elif currentSubs < oldSubs:
-						bot.send_message(tg_id, 'Que pena... Perdemos um Sub... =(\nTotal: %s' % currentSubs)
+						bot.send_message(tg_id, 'Perdemos %d Subs hoje... =(' % int(oldSubs)-int(currentSubs))
 
 					oldSubs = currentSubs
 
-					sleep(30)
+					sleep(24 * 3600)
 		else:
 			bot.send_message(chatid, 'Desculpe-me, mas meu pai me ensinou que não devo conversar com estranhos!')
 
