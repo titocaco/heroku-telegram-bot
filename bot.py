@@ -37,6 +37,8 @@ bot = telebot.TeleBot(token)
 
 # bot.polling()
 
+STATUS = True
+
 def listener(messages):
 	"""
 	When new messages arrive TeleBot will call this function.
@@ -54,19 +56,26 @@ def listener(messages):
 # 				bot.send_message(chatid, text)
 		
 		if str(chatid) == tg_id:
-			bot.send_message(tg_id, 'STARTING BOT...')
-			while True:
-				data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
-				currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+			if m.content_type == 'text':
+				if text == 'on':
+					bot.send_message(tg_id, 'STARTING BOT...')
+					global STATUS = True
+				elif text == 'off':
+					bot.send_message(tg_id, 'TURNING OFF...')
+					global STATUS = Off
+					
+				while STATUS:
+					data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
+					currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
-				if currentSubs > oldSubs:
-					bot.send_message(tg_id, 'Boa! Mais um Sub na área! =)\nTotal: %s' % currentSubs)
-				elif currentSubs < oldSubs:
-					bot.send_message(tg_id, 'Que pena... Perdemos um Sub... =(\nTotal: %s' % currentSubs)
+					if currentSubs > oldSubs:
+						bot.send_message(tg_id, 'Boa! Mais um Sub na área! =)\nTotal: %s' % currentSubs)
+					elif currentSubs < oldSubs:
+						bot.send_message(tg_id, 'Que pena... Perdemos um Sub... =(\nTotal: %s' % currentSubs)
 
-				oldSubs = currentSubs
+					oldSubs = currentSubs
 
-				sleep(5)
+					sleep(5)
 		else:
 			bot.send_message(chatid, 'Desculpe-me, mas meu pai me ensinou que não devo conversar com estranhos!')
 
