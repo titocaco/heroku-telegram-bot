@@ -12,6 +12,7 @@ from time import sleep
 token = os.environ['TELEGRAM_TOKEN']
 yt_id = os.environ['YT_ID']
 yt_key = os.environ['API_KEY']
+tg_id = os.environ['TG_ID']
 #             ...
 
 #       Your bot code below
@@ -59,6 +60,17 @@ bot.polling()
 bot.polling(none_stop=True)
 # Interval setup. Sleep 3 secs between request new message.
 bot.polling(interval=3)
+
+while True:
+	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
+	currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+
+	if currentSubs != oldSubs:
+		bot.send_message(chatid, currentSubs)
+
+	oldSubs = currentSubs
+
+	sleep(5)
 
 while True: # Don't let the main Thread end.
 	pass
