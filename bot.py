@@ -59,9 +59,9 @@ def listener(messages):
 			currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
 			if currentSubs > oldSubs:
-				bot.send_message(tg_id, 'Parabéns! Mais um sub na área! Total: ' + currentSubs)
+				bot.send_message(tg_id, 'Boa! Mais um Sub na área! =)\nTotal: %s' % currentSubs)
 			elif currentSubs < oldSubs:
-				bot.send_message(tg_id, 'Que pena... Perdemos um Sub. Total: ' + currentSubs)
+				bot.send_message(tg_id, 'Que pena... Perdemos um Sub... =(\nTotal: %s' % currentSubs)
 
 			oldSubs = currentSubs
 
