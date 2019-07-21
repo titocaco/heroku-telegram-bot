@@ -73,13 +73,13 @@ def listener(messages):
 					currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
 					if currentSubs > oldSubs:
-						bot.send_message(tg_id, 'Ganhamos %d Subs hoje! =)' % int(currentSubs)-int(oldSubs))
+						bot.send_message(tg_id, 'Ganhamos %d Subs! =)' % int(currentSubs)-int(oldSubs))
 					elif currentSubs < oldSubs:
-						bot.send_message(tg_id, 'Perdemos %d Subs hoje... =(' % int(oldSubs)-int(currentSubs))
+						bot.send_message(tg_id, 'Perdemos %d Subs... =(' % int(oldSubs)-int(currentSubs))
 
 					oldSubs = currentSubs
 
-					sleep(24 * 3600)
+					sleep(3600)
 		else:
 			bot.send_message(chatid, 'Desculpe-me, mas meu pai me ensinou que não devo conversar com estranhos!')
 
