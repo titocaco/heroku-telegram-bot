@@ -52,8 +52,9 @@ def listener(messages):
 # 				bot.send_message(chatid, oldSubs)
 # 			else:
 # 				bot.send_message(chatid, text)
+		
+		bot.send_message(tg_id, 'STARTING BOT...')
 		while True:
-			bot.send_message(tg_id, 'STARTING BOT...')
 			data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
 			currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
