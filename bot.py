@@ -22,9 +22,6 @@ tg_id = os.environ['TG_ID']
 
 bot = telebot.TeleBot(token)
 
-data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
-oldSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-
 # @bot.message_handler(commands=['acorde', 'help'])
 # def send_message(message):
 # 	bot.reply_to(message, 'Bom dia!')
@@ -44,6 +41,9 @@ def listener(messages):
 	"""
 	When new messages arrive TeleBot will call this function.
 	"""
+	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
+	oldSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+	
 	for m in messages:
 		chatid = m.chat.id
 # 		if m.content_type == 'text':
