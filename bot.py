@@ -53,7 +53,7 @@ def listener(messages):
 # 			else:
 # 				bot.send_message(chatid, text)
 		
-		if chatid == tg_id:
+		if str(chatid) == tg_id:
 			bot.send_message(tg_id, 'STARTING BOT...')
 			while True:
 				data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
@@ -68,7 +68,6 @@ def listener(messages):
 
 				sleep(5)
 		else:
-			bot.send_message(chatid, str(chatid) + '___' + tg_id)
 			bot.send_message(chatid, 'Desculpe-me, mas meu pai me ensinou que não devo conversar com estranhos!')
 
 
