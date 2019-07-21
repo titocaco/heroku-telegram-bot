@@ -66,7 +66,7 @@ while True:
 	currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
 	if currentSubs != oldSubs:
-		bot.send_message(chatid, currentSubs)
+		bot.send_message(tg_id, currentSubs)
 
 	oldSubs = currentSubs
 
