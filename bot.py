@@ -53,19 +53,22 @@ def listener(messages):
 # 			else:
 # 				bot.send_message(chatid, text)
 		
-		bot.send_message(tg_id, 'STARTING BOT...')
-		while True:
-			data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
-			currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+		if chatid == tg_id:
+			bot.send_message(tg_id, 'STARTING BOT...')
+			while True:
+				data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
+				currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
-			if currentSubs > oldSubs:
-				bot.send_message(tg_id, 'Boa! Mais um Sub na área! =)\nTotal: %s' % currentSubs)
-			elif currentSubs < oldSubs:
-				bot.send_message(tg_id, 'Que pena... Perdemos um Sub... =(\nTotal: %s' % currentSubs)
+				if currentSubs > oldSubs:
+					bot.send_message(tg_id, 'Boa! Mais um Sub na área! =)\nTotal: %s' % currentSubs)
+				elif currentSubs < oldSubs:
+					bot.send_message(tg_id, 'Que pena... Perdemos um Sub... =(\nTotal: %s' % currentSubs)
 
-			oldSubs = currentSubs
+				oldSubs = currentSubs
 
-			sleep(5)
+				sleep(5)
+		else:
+			bot.send_message(chatid, 'Desculpe-me, mas meu pai me ensinou que não devo conversar com estranhos!')
 
 
 bot.set_update_listener(listener) #register listener
