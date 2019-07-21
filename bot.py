@@ -62,6 +62,7 @@ bot.polling(none_stop=True)
 bot.polling(interval=3)
 
 while True:
+	bot.send_message(tg_id, 'STARTING BOT...')
 	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
 	currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
