@@ -73,7 +73,7 @@ def listener(messages):
 					currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
 					if currentSubs != oldSubs:
-						bot.send_message(tg_id, currentSubs))
+						bot.send_message(tg_id, currentSubs)
 
 					oldSubs = currentSubs
 
