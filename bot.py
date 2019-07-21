@@ -58,8 +58,10 @@ def listener(messages):
 			data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
 			currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 
-			if currentSubs != oldSubs:
-				bot.send_message(tg_id, currentSubs)
+			if currentSubs > oldSubs:
+				bot.send_message(tg_id, 'Parabéns! Mais um sub na área! Total: ' + currentSubs)
+			elif currentSubs < oldSubs:
+				bot.send_message(tg_id, 'Que pena... Perdemos um Sub. Total: ' + currentSubs)
 
 			oldSubs = currentSubs
 
