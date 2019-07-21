@@ -79,7 +79,7 @@ def listener(messages):
 
 					oldSubs = currentSubs
 
-					sleep(5)
+					sleep(30)
 		else:
 			bot.send_message(chatid, 'Desculpe-me, mas meu pai me ensinou que não devo conversar com estranhos!')
 
