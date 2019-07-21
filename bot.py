@@ -46,12 +46,23 @@ def listener(messages):
 	"""
 	for m in messages:
 		chatid = m.chat.id
-		if m.content_type == 'text':
-			text = m.text
-			if text == 'subs':
-				bot.send_message(chatid, oldSubs)
-			else:
-				bot.send_message(chatid, text)
+# 		if m.content_type == 'text':
+# 			text = m.text
+# 			if text == 'subs':
+# 				bot.send_message(chatid, oldSubs)
+# 			else:
+# 				bot.send_message(chatid, text)
+		while True:
+			bot.send_message(tg_id, 'STARTING BOT...')
+			data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
+			currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
+
+			if currentSubs != oldSubs:
+				bot.send_message(tg_id, currentSubs)
+
+			oldSubs = currentSubs
+
+			sleep(5)
 
 
 bot.set_update_listener(listener) #register listener
@@ -60,18 +71,6 @@ bot.polling()
 bot.polling(none_stop=True)
 # Interval setup. Sleep 3 secs between request new message.
 bot.polling(interval=3)
-
-while True:
-	bot.send_message(tg_id, 'STARTING BOT...')
-	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
-	currentSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
-
-	if currentSubs != oldSubs:
-		bot.send_message(tg_id, currentSubs)
-
-	oldSubs = currentSubs
-
-	sleep(5)
 
 while True: # Don't let the main Thread end.
 	pass
