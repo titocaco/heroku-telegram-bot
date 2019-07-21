@@ -43,6 +43,8 @@ def listener(messages):
 	"""
 	When new messages arrive TeleBot will call this function.
 	"""
+	global STATUS
+	
 	data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
 	oldSubs = json.loads(data)["items"][0]["statistics"]["subscriberCount"]
 	
@@ -59,10 +61,10 @@ def listener(messages):
 			if m.content_type == 'text':
 				if text == 'on':
 					bot.send_message(tg_id, 'STARTING BOT...')
-					global STATUS = True
+					STATUS = True
 				elif text == 'off':
 					bot.send_message(tg_id, 'TURNING OFF...')
-					global STATUS = Off
+					STATUS = Off
 					
 				while STATUS:
 					data = request.urlopen("https://www.googleapis.com/youtube/v3/channels?part=statistics&id=" + yt_id + "&key=" + yt_key).read()
